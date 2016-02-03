@@ -1,1 +1,1 @@
-I want to create a Jenga-type game for two players. There is a stack of blocks, and each type a player clicks a block 
+I want to create a Jenga-type game for two players, called Dynamite. There is a tower of blocks, and each type a player clicks a block, that block disappears from the tower. If a player clicks the dynamite block, the tower falls and the other player is the winner.
