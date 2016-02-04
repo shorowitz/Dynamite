@@ -54,7 +54,6 @@ function Tower() {
         };
 
 
-
   this.thoseBlocksTho = function () {
     $('.blocks').each(function (i) {                   //source: DOUG!
         $('.blocks').eq(i).on('click', function(e) {
@@ -72,7 +71,7 @@ function Tower() {
     if (playedBlock.dynoCarrier === false) {
       playedBlock.hide();
       $('#' + x).css('border', 'none');
-      // $('.blocks').eq(this.indexOfDyno).attr("background-color", "red");
+      // $('.blocks').eq(that.indexOfDyno).animate("pulsate", { times:3 }, 2000);
       // setTimeout(that.nextTurn, 2000);
       this.nextTurn();
 
@@ -127,10 +126,13 @@ var game = {
 }
 
 $start.on('click', function() {
+  $('.blocks').remove();
+  $player.empty();
   game.start();
 })
 
 $reset.on('click', function() {
+  $('.blocks').remove();
   $player.empty();
 })
 
