@@ -60,7 +60,8 @@ function Tower() {
   $('.blocks').each(function (i) { //source: DOUG!
   $('.blocks').eq(i).on('click', function(e) {
     var x = $(e.target).attr('id');
-    this.makePlay(this.shownBlocksArray[x])
+    console.log(this.shownBlocksArray[x])
+    // this.makePlay(this.shownBlocksArray[x])
   });
     });
 };
