@@ -1,9 +1,3 @@
-$(function () {
-  console.log('linked');
-
-var $container = $('.game-container');
-
-
 function Block() {
 
   this.shown = true;
@@ -16,6 +10,14 @@ function Block() {
       return;
     };
   }
+
+  // this.playable = function() {
+  //   if (this.shown) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   };
+  // }
 }
 
 function Tower() {
@@ -26,29 +28,21 @@ function Tower() {
   this.shownBlocksArray = [];
   this.dyno = {};
 
-
   this.startGame = function() {
     for (var i =0; i < 18; i++) {
       var block = new Block();
       this.towerArray.push(block);
     }
-
     this.currentPlayer = 'Player1';
-    this.getshownBlocks();
   }
 
   this.getshownBlocks = function() {
     for (var i=0; i < this.towerArray.length; i++) {
       if (this.towerArray[i].shown === true) {
         this.shownBlocksArray.push(this.towerArray[i]);
-
-        var $blocks = $('<div>');
-        $blocks.addClass('blocks').attr('id', i);
-        $container.append($blocks);
       };
     };
     this.assignDynamite();
-    this.thoseBlocksTho();
   };
 
   this.assignDynamite = function() {
@@ -56,23 +50,11 @@ function Tower() {
     this.dyno.dynoCarrier = true;
   };
 
-
-  this.thoseBlocksTho = function() {
-  $('.blocks').each(function (i) { //source: DOUG!
-    $('.blocks').eq(i).on('click', this.addEventsToBlocks)
-    });
-  }
-
-    this.addEventsToBlocks = function () {
-    this.makePlay(this.shownBlocksArray[i]);
-  }
-
-
   this.makePlay = function(playedBlock) {
-    if (playedBlock.dynoCarrier === false) {
-      playedBlock.hide();
+    if (this.shownBlocksArray[playedBlock].dynoCarrier === false) { //could just be playedBlock
+      this.shownBlocksArray[playedBlock].hide(); //could just be playedBlock
       this.nextTurn();
-    } else if (playedBlock.dynoCarrier === true) {
+    } else if (this.shownBlocksArray[playedBlock].dynoCarrier === true) {
       this.assignLoser(this.currentPlayer);
     } else {
       return;
@@ -81,8 +63,6 @@ function Tower() {
 
   this.nextTurn = function() {
     this.dyno.dynoCarrier = false;
-    this.shownBlocksArray = [];
-    $('.blocks').remove();
     this.getshownBlocks();
     if (this.currentPlayer === 'Player1') {
       this.currentPlayer = 'Player2';
@@ -129,33 +109,33 @@ var game = {
 
 }
 
-
-
+$(function () {
+    console.log('linked');
     var $start = $('#start');
     var $reset = $('#reset');
-  //   var $container = $('.game-container')
-  //
-  //   // function start() {
-  //   //   $start.on('click',function() {
-  //       game.start();
-  //   //   });
-  //   // }
-  //
-  //   var buildBlocks = function () {
-  //     for (var i = 0; i < 18; i++) {
-  //       var $divs = $('<div>');
-  //       $divs.attr('id', i);
-  //       $divs.attr('class', 'blocks');
-  //       $container.append($divs);
-  //
-  //
-  //       // $divs.on('click', function (event) {
-  //       //   var clicked = $(event.target).attr('id');
-  //       //   var makeAMove = game.play(clicked);
-  //       // });
-  //     }
-  //   }
-  //   //   return $divs;
-  //   // }
-  //   // $container.append(buildBlocks());
+    var $container = $('.game-container')
+
+    // function start() {
+    //   $start.on('click',function() {
+        game.start();
+    //   });
+    // }
+
+    var buildBlocks = function () {
+      for (var i = 0; i < 18; i++) {
+        var $divs = $('<div>');
+        $divs.attr('id', i);
+        $divs.attr('class', 'blocks');
+        $container.append($divs);
+
+
+        // $divs.on('click', function (event) {
+        //   var clicked = $(event.target).attr('id');
+        //   var makeAMove = game.play(clicked);
+        // });
+      }
+    }
+    //   return $divs;
+    // }
+    // $container.append(buildBlocks());
   })
