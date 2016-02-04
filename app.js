@@ -44,16 +44,24 @@ function Tower() {
   }
 
   this.assignDynamite = function() {
-    this.indexOfDyno = Math.floor(Math.random()*this.towerArray.length);
-    this.dyno = this.towerArray[this.indexOfDyno]; //source: StackOverflow - http://stackoverflow.com/questions/5915096/get-random-item-from-javascript-array
-    this.dyno.dynoCarrier = true;
-  };
+        this.indexOfDyno = Math.floor(Math.random()*this.towerArray.length);
+       //source: StackOverflow - http://stackoverflow.com/questions/5915096/get-random-item-from-javascript-array
+        while (this.towerArray[this.indexOfDyno].shown === false) {
+              this.indexOfDyno = Math.floor(Math.random()*this.towerArray.length);
+          };
+          this.dyno = this.towerArray[this.indexOfDyno];
+          this.dyno.dynoCarrier = true;
+        };
+
+
 
   this.thoseBlocksTho = function () {
     $('.blocks').each(function (i) {                   //source: DOUG!
         $('.blocks').eq(i).on('click', function(e) {
             var x = $(e.target).attr('id');
+            if (that.towerArray[x].shown === true) {
             that.makePlay(x);
+          };
             });
           });
         };
@@ -83,8 +91,10 @@ function Tower() {
         $player.text('Player 1 is up!');
     };
     this.assignDynamite();
-    this.thoseBlocksTho();
+    // this.thoseBlocksTho();
   };
+
+
 
   this.assignLoser = function(player) {
     $('.blocks').remove();
@@ -103,9 +113,9 @@ var game = {
   firstPlayer: function() {
     var playa = Math.round(Math.random()); //source: StackOverflow - http://stackoverflow.com/questions/9730966/how-to-decide-between-two-numbers-randomly-using-javascript
     if (playa === 1) {
-      $('.players').text('The player sitting on the left is going first!');
+      $player.text('The player sitting on the left is going first!');
     } else {
-      $('.players').text('The player sitting on the right is going first!'); //perhaps needs a timer
+      $player.text('The player sitting on the right is going first!'); //perhaps needs a timer
     }
   },
 
