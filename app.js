@@ -25,57 +25,45 @@ function Tower() {
   var that = this;
   this.towerArray = [];
   this.currentPlayer = 'Player 1';
-  this.loser = '';
-  this.shownBlocksArray = [];
   this.dyno = {};
-  this.indexOfDyno = -1;
+  this.indexOfDyno = 0;
 
 
   this.startGame = function() {
     for (var i =0; i < 18; i++) {
       var block = new Block();
       this.towerArray.push(block);
-    }
 
-    this.getshownBlocks();
-  }
-
-  this.getshownBlocks = function() {
-    for (var i=0; i < this.towerArray.length; i++) {
-      if (this.towerArray[i].shown === true) {
-        this.shownBlocksArray.push(this.towerArray[i]);
-
-        var $blocks = $('<div>');
-        $blocks.addClass('blocks').attr('id', i);
-        $container.append($blocks);
-      };
+      var $blocks = $('<div>');
+      $blocks.addClass('blocks').attr('id', i);
+      $container.append($blocks);
     };
+
     this.assignDynamite();
     this.thoseBlocksTho();
-  };
-
-
+  }
 
   this.assignDynamite = function() {
-    this.indexOfDyno = Math.floor(Math.random()*this.shownBlocksArray.length);
-    this.dyno = this.shownBlocksArray[this.indexOfDyno]; //source: StackOverflow - http://stackoverflow.com/questions/5915096/get-random-item-from-javascript-array
+    this.indexOfDyno = Math.floor(Math.random()*this.towerArray.length);
+    this.dyno = this.towerArray[this.indexOfDyno]; //source: StackOverflow - http://stackoverflow.com/questions/5915096/get-random-item-from-javascript-array
     this.dyno.dynoCarrier = true;
   };
 
-  this.thoseBlocksTho = function() {
-    $('.blocks').each(function (i) { //source: DOUG!
-      $('.blocks').eq(i).on('click', function(e) {
-          var x = $(e.target).attr('id');
-          that.makePlay(x);
-  });
-    });
-};
+  this.thoseBlocksTho = function () {
+    $('.blocks').each(function (i) {                   //source: DOUG!
+        $('.blocks').eq(i).on('click', function(e) {
+            var x = $(e.target).attr('id');
+            that.makePlay(x);
+            });
+          });
+        };
+
 
   this.makePlay = function(x) {
     var playedBlock = this.towerArray[x];
     if (playedBlock.dynoCarrier === false) {
       playedBlock.hide();
-      $('#' + x).css('border: none');
+      $('#' + x).css('border', 'none');
       // $('.blocks').eq(this.indexOfDyno).attr("background-color", "red");
       // setTimeout(that.nextTurn, 2000);
       this.nextTurn();
@@ -87,8 +75,6 @@ function Tower() {
 
   this.nextTurn = function() {
     this.dyno.dynoCarrier = false;
-    this.shownBlocksArray = [];
-    $('.blocks').remove();
     if (this.currentPlayer === 'Player 1') {
       this.currentPlayer = 'Player 2';
       $player.text('Player 2 is up!');
@@ -96,10 +82,9 @@ function Tower() {
         this.currentPlayer = 'Player 1';
         $player.text('Player 1 is up!');
     };
-
-    this.getshownBlocks();
-
-  }
+    this.assignDynamite();
+    this.thoseBlocksTho();
+  };
 
   this.assignLoser = function(player) {
     $('.blocks').remove();
