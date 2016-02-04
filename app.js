@@ -56,17 +56,14 @@ function Tower() {
     this.dyno.dynoCarrier = true;
   };
 
-
   this.thoseBlocksTho = function() {
   $('.blocks').each(function (i) { //source: DOUG!
-    $('.blocks').eq(i).on('click', this.addEventsToBlocks)
+  $('.blocks').eq(i).on('click', function(e) {
+    var x = $(e.target).attr('id');
+    this.makePlay(this.shownBlocksArray[x])
+  });
     });
-  }
-
-    this.addEventsToBlocks = function () {
-    this.makePlay(this.shownBlocksArray[i]);
-  }
-
+};
 
   this.makePlay = function(playedBlock) {
     if (playedBlock.dynoCarrier === false) {
@@ -95,6 +92,7 @@ function Tower() {
     return this.loser = player;
   }
 }
+
 
 var game = {
   tower:'',
