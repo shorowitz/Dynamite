@@ -5,3 +5,8 @@
   display: inline-block;
 
 }
+
+.player {
+  font-size: 32;
+  color: black;
+}

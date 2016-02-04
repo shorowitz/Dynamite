@@ -2,6 +2,9 @@ $(function () {
   console.log('linked');
 
 var $container = $('.game-container');
+var $player = $('.players')
+var $start = $('#start');
+var $reset = $('#reset');
 
 
 function Block() {
@@ -19,12 +22,13 @@ function Block() {
 }
 
 function Tower() {
-
+  var that = this;
   this.towerArray = [];
-  this.currentPlayer = '';
+  this.currentPlayer = 'Player 1';
   this.loser = '';
   this.shownBlocksArray = [];
   this.dyno = {};
+  this.indexOfDyno = -1;
 
 
   this.startGame = function() {
@@ -33,7 +37,6 @@ function Tower() {
       this.towerArray.push(block);
     }
 
-    this.currentPlayer = 'Player1';
     this.getshownBlocks();
   }
 
@@ -51,46 +54,56 @@ function Tower() {
     this.thoseBlocksTho();
   };
 
+
+
   this.assignDynamite = function() {
-    this.dyno = this.shownBlocksArray[Math.floor(Math.random()*this.shownBlocksArray.length)]; //source: StackOverflow - http://stackoverflow.com/questions/5915096/get-random-item-from-javascript-array
+    this.indexOfDyno = Math.floor(Math.random()*this.shownBlocksArray.length);
+    this.dyno = this.shownBlocksArray[this.indexOfDyno]; //source: StackOverflow - http://stackoverflow.com/questions/5915096/get-random-item-from-javascript-array
     this.dyno.dynoCarrier = true;
   };
 
   this.thoseBlocksTho = function() {
-  $('.blocks').each(function (i) { //source: DOUG!
-  $('.blocks').eq(i).on('click', function(e) {
-    var x = $(e.target).attr('id');
-    console.log(this.shownBlocksArray[x])
-    // this.makePlay(this.shownBlocksArray[x])
+    $('.blocks').each(function (i) { //source: DOUG!
+      $('.blocks').eq(i).on('click', function(e) {
+          var x = $(e.target).attr('id');
+          that.makePlay(x);
   });
     });
 };
 
-  this.makePlay = function(playedBlock) {
+  this.makePlay = function(x) {
+    var playedBlock = this.towerArray[x];
     if (playedBlock.dynoCarrier === false) {
       playedBlock.hide();
+      $('#' + x).css('border: none');
+      // $('.blocks').eq(this.indexOfDyno).attr("background-color", "red");
+      // setTimeout(that.nextTurn, 2000);
       this.nextTurn();
+
     } else if (playedBlock.dynoCarrier === true) {
-      this.assignLoser(this.currentPlayer);
-    } else {
-      return;
-    }
+        this.assignLoser(this.currentPlayer);
+    };
   };
 
   this.nextTurn = function() {
     this.dyno.dynoCarrier = false;
     this.shownBlocksArray = [];
     $('.blocks').remove();
+    if (this.currentPlayer === 'Player 1') {
+      this.currentPlayer = 'Player 2';
+      $player.text('Player 2 is up!');
+    } else if (this.currentPlayer === 'Player 2') {
+        this.currentPlayer = 'Player 1';
+        $player.text('Player 1 is up!');
+    };
+
     this.getshownBlocks();
-    if (this.currentPlayer === 'Player1') {
-      this.currentPlayer = 'Player2';
-    } else {
-      this.currentPlayer === 'Player1';
-    }
+
   }
 
   this.assignLoser = function(player) {
-    return this.loser = player;
+    $('.blocks').remove();
+    $player.text(player + ' lit the dynamite! GAME OVER');
   }
 }
 
@@ -105,9 +118,9 @@ var game = {
   firstPlayer: function() {
     var playa = Math.round(Math.random()); //source: StackOverflow - http://stackoverflow.com/questions/9730966/how-to-decide-between-two-numbers-randomly-using-javascript
     if (playa === 1) {
-      window.alert('The player sitting on the left is going first!');
+      $('.players').text('The player sitting on the left is going first!');
     } else {
-      window.alert('The player sitting on the right is going first!'); //perhaps needs a timer
+      $('.players').text('The player sitting on the right is going first!'); //perhaps needs a timer
     }
   },
 
@@ -116,21 +129,15 @@ var game = {
     this.firstPlayer();
     this.tower.startGame();
   },
-
-  play: function(playedBlock) {
-    var playerMove = this.tower.makePlay(playedBlock);
-    return playerMove;
-  },
-
-  // over: function() {
-  //   window.alert('Oh no!' + this.tower.assignLoser() + ' made the dynamite explode! GAME OVER');
-  // }
-
 }
 
+$start.on('click', function() {
+  game.start();
+})
+
+$reset.on('click', function() {
+  $player.empty();
+})
 
 
-    var $start = $('#start');
-    var $reset = $('#reset');
-
-  })
+})
