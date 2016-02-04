@@ -131,29 +131,5 @@ var game = {
 
     var $start = $('#start');
     var $reset = $('#reset');
-  //   var $container = $('.game-container')
-  //
-  //   // function start() {
-  //   //   $start.on('click',function() {
-  //       game.start();
-  //   //   });
-  //   // }
-  //
-  //   var buildBlocks = function () {
-  //     for (var i = 0; i < 18; i++) {
-  //       var $divs = $('<div>');
-  //       $divs.attr('id', i);
-  //       $divs.attr('class', 'blocks');
-  //       $container.append($divs);
-  //
-  //
-  //       // $divs.on('click', function (event) {
-  //       //   var clicked = $(event.target).attr('id');
-  //       //   var makeAMove = game.play(clicked);
-  //       // });
-  //     }
-  //   }
-  //   //   return $divs;
-  //   // }
-  //   // $container.append(buildBlocks());
+
   })
