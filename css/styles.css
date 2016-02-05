@@ -1,0 +1,17 @@
+.blocks {
+  border: 5px solid black;
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+  background-color: blue;
+
+}
+
+.player {
+  font-size: 32;
+  color: black;
+}
+
+.game-container {
+  width: 200px;
+}
