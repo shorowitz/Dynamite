@@ -1,17 +1,39 @@
+*{
+  margin:0;
+  padding: 0;
+}
+
+body {
+  text-align:center;
+}
+
+header {
+  width: 960px;
+  margin:0 auto;
+
+}
+/*.container {
+  margin: 0 auto;
+}*/
+
+
 .blocks {
-  border: 5px solid black;
+  border: 3px solid black;
   width: 50px;
   height: 50px;
   display: inline-block;
   background-color: blue;
+  padding: 0px;
+  margin: 0px;
 
 }
 
-.player {
-  font-size: 32;
+.players {
+  font-size: 56;
   color: black;
 }
 
 .game-container {
   width: 200px;
+  margin: 0 auto;
 }

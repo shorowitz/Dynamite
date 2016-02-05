@@ -97,7 +97,14 @@ function Tower() {
 
 
   this.assignLoser = function(player) {
-    $('.blocks').remove();
+    // $('.blocks').remove();
+    $('body').jGravity({
+      target: '.blocks',
+      weight: 20,
+      depth: 10,
+      drag: true
+    });
+    
     $player.text(player + ' lit the dynamite! GAME OVER');
   }
 }
@@ -125,6 +132,7 @@ var game = {
     this.tower.startGame();
   },
 }
+
 
 $start.on('click', function() {
   $('.blocks').remove();
