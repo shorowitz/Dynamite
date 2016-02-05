@@ -70,12 +70,14 @@ function Tower() {
     var playedBlock = this.towerArray[x];
     if (playedBlock.dynoCarrier === false) {
       playedBlock.hide();
-      $('#' + x).css('border', 'none');
-      // $('.blocks').eq(that.indexOfDyno).animate("pulsate", { times:3 }, 2000);
-      // setTimeout(that.nextTurn, 2000);
-      this.nextTurn();
+      $('#' + x).css('background', 'none');
+      $('#' + that.indexOfDyno).fadeOut(400).fadeIn(400);
+      setTimeout(function () {
+      that.nextTurn();
+      }, 500);
+      // this.nextTurn();
 
-    } else if (playedBlock.dynoCarrier === true) {
+      } else if (playedBlock.dynoCarrier === true) {
         this.assignLoser(this.currentPlayer);
     };
   };
@@ -90,7 +92,6 @@ function Tower() {
         $player.text('Player 1 is up!');
     };
     this.assignDynamite();
-    // this.thoseBlocksTho();
   };
 
 
