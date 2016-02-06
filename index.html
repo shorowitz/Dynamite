@@ -4,23 +4,42 @@
     <meta charset="utf-8">
     <title>DYNAMITE</title>
     <link rel="stylesheet" href="css/styles.css"/>
-    <link rel="stylesheet" href="css/bootswatch.css"/>
-    <!-- <link rel="stylesheet" href="css/skeleton.css"/>
-    <link rel="stylesheet" href="css/normalize.css"/> -->
+    <link href='https://fonts.googleapis.com/css?family=Play:700,400' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/skeleton.css"/>
+    <link rel="stylesheet" href="css/normalize.css"/>
     <script src="jquery.js"></script>
     <script src="jGravity.js"></script>
   </head>
   <body>
     <div class="container">
-    <header><h1>DYNAMITE</h1></header>
-
-    <div class="btn" id="start"><button>START</button></div>
-    <div class="game-container">
-      <!-- /apend my tower here/ -->
+      <div class="row">
+        <header><h1 id="title">DYNAMITE</h1></header>
+      </div>
+      <div class="row">
+        <a class="button" id="start">START</a>
+      </div>
+      <div class="row">
+        <!-- <div class="four columns"> -->
+          <div class="players"></div>
+        <!-- </div> -->
+      </div>
+      <div class="row">
+        <!-- <div class="ten columns"> -->
+          <div class="game-container">
+             <!-- /apend my tower here/ -->
+          </div>
+        <!-- </div> -->
+      </div>
+      <footer>
+        <div class="row">
+          <div class = "two columns">
+            <a class="button" id="reset">RESET</a>
+          </div>
+          <div class = "ten columns">
+          </div>
+        </div>
+      </footer>
     </div>
-    <div class="players"></div>
-    <div class="btn" id="reset"><button>RESET</button></div>
-  </div>
-  <script src="app.js"></script>
+    <script src="app.js"></script>
   </body>
 </html>
