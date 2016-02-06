@@ -44,8 +44,7 @@ function Tower() {
   }
 
   this.assignDynamite = function() {
-        this.indexOfDyno = Math.floor(Math.random()*this.towerArray.length);
-       //source: StackOverflow - http://stackoverflow.com/questions/5915096/get-random-item-from-javascript-array
+        this.indexOfDyno = Math.floor(Math.random()*this.towerArray.length); //source: StackOverflow - http://stackoverflow.com/questions/5915096/get-random-item-from-javascript-array
         while (this.towerArray[this.indexOfDyno].shown === false) {
               this.indexOfDyno = Math.floor(Math.random()*this.towerArray.length);
           };
@@ -75,7 +74,6 @@ function Tower() {
       setTimeout(function () {
       that.nextTurn();
       }, 500);
-      // this.nextTurn();
 
       } else if (playedBlock.dynoCarrier === true) {
         this.assignLoser(this.currentPlayer);
@@ -97,7 +95,14 @@ function Tower() {
 
 
   this.assignLoser = function(player) {
-    $('.blocks').remove();
+    $('#' + that.indexOfDyno).css('background-color','red');
+    $('body').jGravity({
+      target: '.blocks',
+      weight: 10,
+      depth: 20,
+      drag: false
+    });
+
     $player.text(player + ' lit the dynamite! GAME OVER');
   }
 }
@@ -126,15 +131,18 @@ var game = {
   },
 }
 
+
 $start.on('click', function() {
   $('.blocks').remove();
   $player.empty();
+  $start.hide();
   game.start();
 })
 
 $reset.on('click', function() {
   $('.blocks').remove();
   $player.empty();
+  $start.show();
 })
 
 
