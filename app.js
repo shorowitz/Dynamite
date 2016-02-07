@@ -5,6 +5,8 @@ var $container = $('.game-container');
 var $player = $('.players')
 var $start = $('#start');
 var $reset = $('#reset');
+var $instructions = $('.instructions')
+var $play = $('.start')
 
 
 function Block() {
@@ -18,7 +20,7 @@ function Block() {
     } else {
       return;
     };
-  }
+  };
 }
 
 function Tower() {
@@ -54,15 +56,15 @@ function Tower() {
 
 
   this.thoseBlocksTho = function () {
-    $('.blocks').each(function (i) {                   //source: DOUG!
+    $('.blocks').each(function (i) {
         $('.blocks').eq(i).on('click', function(e) {
             var x = $(e.target).attr('id');
             if (that.towerArray[x].shown === true) {
             that.makePlay(x);
-          };
-            });
+            };
           });
-        };
+        });
+      };
 
 
   this.makePlay = function(x) {
@@ -75,9 +77,9 @@ function Tower() {
       that.nextTurn();
       }, 500);
 
-      } else if (playedBlock.dynoCarrier === true) {
+    } else if (playedBlock.dynoCarrier === true) {
         this.assignLoser(this.currentPlayer);
-    };
+      };
   };
 
   this.nextTurn = function() {
@@ -95,21 +97,22 @@ function Tower() {
 
 
   this.assignLoser = function(player) {
-    $('#' + that.indexOfDyno).css('background-color','red');
+    $('#' + that.indexOfDyno).css('background','#DD2C00');
+    $('#' + that.indexOfDyno).append($('<img>', {id: dynamiteImg, src:'dynamite.png'}))
     $('body').jGravity({
       target: '.blocks',
       weight: 10,
-      depth: 20,
+      depth: 10,
       drag: false
     });
 
-    $player.text(player + ' lit the dynamite! GAME OVER');
+    $player.text(player + ' clicked the dynamite! GAME OVER');
   }
 }
 
 
 var game = {
-  tower:'',
+  // tower:'',
 
   makeTower: function() {
     this.tower = new Tower();
@@ -120,7 +123,7 @@ var game = {
     if (playa === 1) {
       $player.text('The player sitting on the left is going first!');
     } else {
-      $player.text('The player sitting on the right is going first!'); //perhaps needs a timer
+      $player.text('The player sitting on the right is going first!');
     }
   },
 
@@ -134,15 +137,17 @@ var game = {
 
 $start.on('click', function() {
   $('.blocks').remove();
+  $instructions.hide();
   $player.empty();
-  $start.hide();
+  $play.hide();
   game.start();
 })
 
 $reset.on('click', function() {
   $('.blocks').remove();
   $player.empty();
-  $start.show();
+  $play.show();
+  $instructions.show();
 })
 
 
