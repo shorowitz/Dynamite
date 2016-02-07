@@ -4,21 +4,40 @@
     <meta charset="utf-8">
     <title>DYNAMITE</title>
     <link rel="stylesheet" href="css/styles.css"/>
+    <link href='https://fonts.googleapis.com/css?family=Play:700,400' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="css/skeleton.css"/>
-    <!-- <link rel="stylesheet" href="css/normalize.css"/> -->
+    <link rel="stylesheet" href="css/normalize.css"/>
     <script src="jquery.js"></script>
+    <script src="jGravity.js"></script>
   </head>
   <body>
     <div class="container">
-    <header><h1>DYNAMITE</h1></header>
-
-    <div class="button" id="start"><button>START</button></div>
-    <div class="game-container">
-      <!-- /apend my tower here/ -->
+      <div class="row">
+        <header><h1 id="title">DYNAMITE</h1></header>
+      </div>
+      <div class="row instructions">Let's play DYNAMITE! Take turns removing the metal paneling from the tower block by block. Click the panel you want to remove, but be careful not to click the hidden dynamite! The dynamite blinks and moves to a new block after each turn.</div>
+      <div class="row start">
+        <a class="button" id="start">PLAY</a>
+      </div>
+      <div class="row">
+          <div class="players"></div>
+      </div>
+      <div class="row">
+          <img id="dynamiteImg"/>
+          <div class="game-container">
+             <!-- /apend my tower here/ -->
+          </div>
+      </div>
+      <footer>
+        <div class="row">
+          <div class = "two columns">
+            <a class="button" id="reset">RESET</a>
+          </div>
+          <div class = "ten columns">
+          </div>
+        </div>
+      </footer>
     </div>
-    <div class=players></div>
-    <div class="button" id="reset"><button>RESET</button></div>
     <script src="app.js"></script>
-  </div>
   </body>
 </html>
